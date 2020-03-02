@@ -1,7 +1,7 @@
 elizabot-js
 ===========
 
-Eliza JS bot based on www.masswerk.at/elizabot and http://en.wikipedia.org/wiki/ELIZA
+Annotated Eliza JS bot based on [this](https://github.com/brandongmwong/elizabot-js) which was based on [this](http://www.masswerk.at/elizabot) and http://en.wikipedia.org/wiki/ELIZA
 
 Usage:
 
