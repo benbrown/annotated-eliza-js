@@ -42,10 +42,9 @@ function ElizaBot(noRandomFlag) {
 	this.elizaSynons = data.synons;
 
 	this.noRandom = (noRandomFlag)? true:false;
-	this.capitalizeFirstLetter=true;
-	this.debug=false;
-	this.memSize=20;
-	this.version="1.1 (original)";
+	this.capitalizeFirstLetter = true;
+	this.debug = false;
+	this.memSize = 20;
 
 	this._init();
 	this.reset();
@@ -56,16 +55,17 @@ function ElizaBot(noRandomFlag) {
  * Re-populate the lastchoice array.
  */
 ElizaBot.prototype.reset = function() {
-	this.mem=[];
-	this.lastchoice=[];
+	// reset the bot's memory
+	this.mem = [];
+	this.lastchoice = [];
 
-	// lastchoice somehow tracks if a rule has been triggered
-	// TODO: more info on what this is actually used for
-	// so... this resets every rule to -1
+	// reset the lastchoice array
+	// this is used to track what replies have been used
+	// so that the bot won't repeat itself
 	for (var k=0; k<this.elizaKeywords.length; k++) {
 		this.lastchoice[k]=[];
-		var rules=this.elizaKeywords[k][2];
-		for (var i=0; i<rules.length; i++) this.lastchoice[k][i]=-1;
+		var rules = this.elizaKeywords[k][2];
+		for (var i=0; i < rules.length; i++) this.lastchoice[k][i] = -1;
 	}
 }
 
@@ -256,6 +256,8 @@ ElizaBot.prototype.transform = function(text) {
 			// If so, quit and send the last message.
 			for (var q = 0; q < this.elizaQuits.length; q++) {
 				if (this.elizaQuits[q] == part) {
+					// reset bot's memory
+					this.reset();
 					return this.getFinal();
 				}
 			}
